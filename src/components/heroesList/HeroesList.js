@@ -18,7 +18,7 @@ const HeroesList = () => {
 
     useEffect(() => {
         dispatch(heroesFetching());
-        request("http://localhost:3001/heroes")
+      request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json")
             .then(data => dispatch(heroesFetched(data)))
             .catch(() => dispatch(heroesFetchingError()))
 
