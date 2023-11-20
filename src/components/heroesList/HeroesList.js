@@ -14,14 +14,15 @@ import Spinner from '../spinner/Spinner'
 const HeroesList = () => {
   const heroes = useSelector(state => state.heroes) 
   const heroesLoadingStatus = useSelector(state => state.heroesLoadingStatus)
+  const url = useSelector(state => state.url)
   const dispatch = useDispatch() 
   const {request} = useHttp() 
 
   useEffect(() => {
-      dispatch(heroesFetching()) 
-    request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json")
-          .then(data => dispatch(heroesFetched(data)))
-          .catch(() => dispatch(heroesFetchingError()))
+    dispatch(heroesFetching()) 
+    request(url)
+      .then(data => dispatch(heroesFetched(data)))
+      .catch(() => dispatch(heroesFetchingError()))
 
       // eslint-disable-next-line
   }, []) 

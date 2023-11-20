@@ -4,9 +4,17 @@ import { deleteHeroes } from '../../actions'
 const HeroesListItem = ({ name, description, element }) => {
   const dispatch = useDispatch()
   const heroes = useSelector(state => state.heroes)
+  const url = useSelector(state => state.url)
+  const { request } = useHttp()
   function deleteHero() {
     const array = heroes.filter(hero => hero.name !== name)
     dispatch(deleteHeroes(array))
+    deleteHeroFromServer(array)
+  }
+  function deleteHeroFromServer(array) {
+    const object = { ...array }
+    console.log(object)
+    request(url, 'PUT', JSON.stringify(object))
   }
   let elementClassName 
     switch (element) {
