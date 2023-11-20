@@ -1,23 +1,29 @@
-
-const HeroesListItem = ({name, description, element}) => {
-
-    let elementClassName;
-
+import { useHttp } from '../../hooks/http.hook'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteHeroes } from '../../actions'
+const HeroesListItem = ({ name, description, element }) => {
+  const dispatch = useDispatch()
+  const heroes = useSelector(state => state.heroes)
+  function deleteHero() {
+    const array = heroes.filter(hero => hero.name !== name)
+    dispatch(deleteHeroes(array))
+  }
+  let elementClassName 
     switch (element) {
         case 'fire':
-            elementClassName = 'bg-danger bg-gradient';
-            break;
+            elementClassName = 'bg-danger bg-gradient' 
+            break 
         case 'water':
-            elementClassName = 'bg-primary bg-gradient';
-            break;
+            elementClassName = 'bg-primary bg-gradient' 
+            break 
         case 'wind':
-            elementClassName = 'bg-success bg-gradient';
-            break;
+            elementClassName = 'bg-success bg-gradient' 
+            break 
         case 'earth':
-            elementClassName = 'bg-secondary bg-gradient';
-            break;
+            elementClassName = 'bg-secondary bg-gradient' 
+            break 
         default:
-            elementClassName = 'bg-warning bg-gradient';
+            elementClassName = 'bg-warning bg-gradient' 
     }
 
     return (
@@ -33,10 +39,14 @@ const HeroesListItem = ({name, description, element}) => {
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button type="button" className="btn-close btn-close" aria-label="Close"></button>
+          <button type="button" className="btn-close btn-close"
+            aria-label="Close"
+            onClick={deleteHero}
+          >
+          </button>
             </span>
         </li>
     )
 }
 
-export default HeroesListItem;
+export default HeroesListItem 
