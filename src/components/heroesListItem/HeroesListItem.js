@@ -13,7 +13,6 @@ const HeroesListItem = ({ name, description, element }) => {
   }
   function deleteHeroFromServer(array) {
     const object = { ...array }
-    console.log(object)
     request(url, 'PUT', JSON.stringify(object))
   }
   let elementClassName 

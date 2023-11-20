@@ -21,7 +21,10 @@ const HeroesList = () => {
   useEffect(() => {
     dispatch(heroesFetching()) 
     request(url)
-      .then(data => dispatch(heroesFetched(data)))
+      .then(data => {
+        if (data === null) data = []
+        dispatch(heroesFetched(data))
+      })
       .catch(() => dispatch(heroesFetchingError()))
 
       // eslint-disable-next-line
