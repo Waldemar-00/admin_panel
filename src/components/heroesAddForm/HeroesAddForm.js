@@ -11,11 +11,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHttp } from '../../hooks/http.hook'
 import { addHeroes } from '../../actions/index'
 import { v4 } from 'uuid'
+import { useEffect } from 'react'
+import { useRef } from 'react'
 const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes)
   const url = useSelector(state => state.url)
   const dispatch = useDispatch()
-  const { request }= useHttp()
+  const { request } = useHttp()
+  let filters = useRef([])
+  useEffect(() => {
+    request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json")
+      .then(data => filters.current = data)
+  }, [request])
+  
+  
   function submitHero(e) {
     e.preventDefault()
     const id = v4()
@@ -26,6 +35,7 @@ const HeroesAddForm = () => {
     dispatch(addHeroes(hero))
     const heroesToServer = { ...hero }
     request(url, 'PUT', JSON.stringify(heroesToServer))
+    document.querySelector('form').reset()
   }
   return (
     <form className="border p-4 shadow-lg rounded"
@@ -59,12 +69,12 @@ const HeroesAddForm = () => {
                   required
                   className="form-select" 
                   id="element" 
-                  name="element">
-                  <option >Я владею элементом...</option>
-                  <option value="fire">Огонь</option>
-                  <option value="water">Вода</option>
-                  <option value="wind">Ветер</option>
-                  <option value="earth">Земля</option>
+          name="element">
+                {
+                  filters.current.map(filter => {
+                    return <option >{ filter }</option>
+                  })
+                }
               </select>
           </div>
 
