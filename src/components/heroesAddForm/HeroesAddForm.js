@@ -1,3 +1,4 @@
+//!Done!
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -7,24 +8,26 @@
 // Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
+//!Done!
 import { useSelector, useDispatch } from 'react-redux'
+import { getFilters } from '../../actions/index'
 import { useHttp } from '../../hooks/http.hook'
 import { addHeroes } from '../../actions/index'
 import { v4 } from 'uuid'
 import { useEffect } from 'react'
-import { useRef } from 'react'
 const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes)
   const url = useSelector(state => state.url)
+  const filters = useSelector(state => state.filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
-  let filters = useRef([])
   useEffect(() => {
     request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json")
-      .then(data => filters.current = data)
-  }, [request])
-  
-  
+      .then(data => {
+        dispatch(getFilters(data))
+      })
+    
+  }, [request, dispatch])
   function submitHero(e) {
     e.preventDefault()
     const id = v4()
@@ -71,8 +74,8 @@ const HeroesAddForm = () => {
                   id="element" 
           name="element">
                 {
-                  filters.current.map(filter => {
-                    return <option >{ filter }</option>
+                  filters.map(filter => {
+                    return <option key={ v4() }>{ filter }</option>
                   })
                 }
               </select>

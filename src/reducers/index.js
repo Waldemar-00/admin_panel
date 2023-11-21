@@ -3,9 +3,6 @@ const initialState = {
   heroesLoadingStatus: 'idle',
   filters: [],
   url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json",
-  name: '',
-  description: '',
-  option: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +28,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         heroes: action.payload,
+      }
+    case 'GET_FILTERS':
+      return {
+        ...state,
+        filters: action.payload
       }
     default: return state
   }
