@@ -1,8 +1,11 @@
 const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle',
-    filters: [],
-    url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json"
+  heroes: [],
+  heroesLoadingStatus: 'idle',
+  filters: [],
+  url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json",
+  name: '',
+  description: '',
+  option: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +27,7 @@ const reducer = (state = initialState, action) => {
             heroesLoadingStatus: 'error'
         }
     case 'DELETE_HERO':
+    case 'ADD_HERO':
       return {
         ...state,
         heroes: action.payload,
