@@ -8,12 +8,14 @@
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
 import { useSelector, useDispatch } from 'react-redux'
-// import { useHttp } from '../../hooks/http.hook'
+import { useHttp } from '../../hooks/http.hook'
 import { addHeroes } from '../../actions/index'
 import { v4 } from 'uuid'
 const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes)
+  const url = useSelector(state => state.url)
   const dispatch = useDispatch()
+  const { request }= useHttp()
   function submitHero(e) {
     e.preventDefault()
     const id = v4()
@@ -22,6 +24,8 @@ const HeroesAddForm = () => {
     const element = document.querySelector('#element').value
     const hero = [...heroes, { id, name, description, element }]
     dispatch(addHeroes(hero))
+    const heroesToServer = { ...hero }
+    request(url, 'PUT', JSON.stringify(heroesToServer))
   }
   return (
     <form className="border p-4 shadow-lg rounded"
