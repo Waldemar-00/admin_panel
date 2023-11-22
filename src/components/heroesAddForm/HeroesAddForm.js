@@ -26,7 +26,6 @@ const HeroesAddForm = () => {
       .then(data => {
         dispatch(getFilters(data))
       })
-    
   }, [request, dispatch])
   function submitHero(e) {
     e.preventDefault()

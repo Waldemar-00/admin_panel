@@ -15,6 +15,7 @@ import Spinner from '../spinner/Spinner'
 
 const HeroesList = () => {
   const heroes = useSelector(state => state.heroes) 
+  const filtered = useSelector(state => state.filtered)
   const heroesLoadingStatus = useSelector(state => state.heroesLoadingStatus)
   const url = useSelector(state => state.url)
   const dispatch = useDispatch() 
@@ -43,12 +44,20 @@ const HeroesList = () => {
           return <h5 className="text-center mt-5">Героев пока нет</h5>
       }
 
-      return arr.map(({id, ...props}) => {
-          return <HeroesListItem key={id} {...props}/>
+    return arr.map(({ id, ...props }) => {
+      if (id) {
+          return <HeroesListItem key={id} {...props} />
+      } else {
+          return <h5 className="text-center mt-5">Такого героя пока нет</h5>
+        }
       })
   }
-
-  const elements = renderHeroesList(heroes) 
+  let elements
+  if (filtered.length > 0 ) {
+    elements = renderHeroesList(filtered)
+  } else {
+    elements = renderHeroesList(heroes)
+  } 
   return (
       <ul>
           {elements}
