@@ -4,14 +4,13 @@ import { deleteHeroes, filtered } from '../../actions/actions'
 const HeroesListItem = ({ name, description, element }) => {
   const dispatch = useDispatch()
   const heroes = useSelector(state => state.heroes)
-  const filteredHeroes = useSelector(state => state.filtered)
+  const filteredHeroes = useSelector(state => state.filtered.filter(hero => hero.name !== name))
   const url = useSelector(state => state.url)
   const { request } = useHttp()
   function deleteHero() {
     const array = heroes.filter(hero => hero.name !== name)
-    const arrayFiltered = filteredHeroes.filter(hero => hero.name !== name)
     dispatch(deleteHeroes(array))
-    dispatch(filtered(arrayFiltered))
+    dispatch(filtered(filteredHeroes))
     deleteHeroFromServer(array)
   }
   function deleteHeroFromServer(array) {
