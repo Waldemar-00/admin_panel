@@ -1,4 +1,4 @@
-
+//!Done!
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -7,8 +7,9 @@
 // Изменять json-файл для удобства МОЖНО!
 // Представьте, что вы попросили бэкенд-разработчика об этом
 // import { useSelector, useDispatch } from 'react-redux'
+//!Done!
 import { useSelector, useDispatch } from 'react-redux'
-import { filtered } from '../../actions/index'
+import { filtered } from '../../actions/actions'
 const HeroesFilters = () => {
   const filters = useSelector(state => state.filters)
   const heroes = useSelector(state => state.heroes)

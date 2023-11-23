@@ -1,6 +1,6 @@
 import { useHttp } from '../../hooks/http.hook'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteHeroes } from '../../actions'
+import { deleteHeroes } from '../../actions/actions'
 const HeroesListItem = ({ name, description, element }) => {
   const dispatch = useDispatch()
   const heroes = useSelector(state => state.heroes)
