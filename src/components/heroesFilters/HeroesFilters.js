@@ -11,8 +11,8 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { filtered } from '../../actions/actions'
 const HeroesFilters = () => {
-  const filters = useSelector(state => state.filters)
-  const heroes = useSelector(state => state.heroes)
+  const filters = useSelector(state => state.filteres.filters)
+  const heroes = useSelector(state => state.heroes.heroes)
   const dispatch = useDispatch()
   function filterOfHeroes(e) {
     const buttons = document.querySelectorAll('.f-r')

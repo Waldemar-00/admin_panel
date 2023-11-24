@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteHeroes, filtered } from '../../actions/actions'
 const HeroesListItem = ({ name, description, element }) => {
   const dispatch = useDispatch()
-  const heroes = useSelector(state => state.heroes)
-  const filteredHeroes = useSelector(state => state.filtered.filter(hero => hero.name !== name))
-  const url = useSelector(state => state.url)
+  const heroes = useSelector(state => state.heroes.heroes)
+  const filteredHeroes = useSelector(state => state.filteres.filtered.filter(hero => hero.name !== name))
+  const url = useSelector(state => state.filteres.url)
   const { request } = useHttp()
   function deleteHero() {
     const array = heroes.filter(hero => hero.name !== name)

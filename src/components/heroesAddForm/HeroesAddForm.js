@@ -17,10 +17,10 @@ import { filtered } from '../../actions/actions'
 import { v4 } from 'uuid'
 import { useEffect } from 'react'
 const HeroesAddForm = () => {
-  const heroes = useSelector(state => state.heroes)
-  const filteredHeroes = useSelector(state => state.filtered)
-  const url = useSelector(state => state.url)
-  const filters = useSelector(state => state.filters)
+  const heroes = useSelector(state => state.heroes.heroes)
+  const filteredHeroes = useSelector(state => state.filteres.filtered)
+  const url = useSelector(state => state.heroes.url)
+  const filters = useSelector(state => state.filteres.filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
   useEffect(() => {
