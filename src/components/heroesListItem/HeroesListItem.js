@@ -1,10 +1,15 @@
 import { useHttp } from '../../hooks/http.hook'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteHeroes, filtered } from '../../actions/actions'
+import { createSelector } from 'reselect'
 const HeroesListItem = ({ name, description, element }) => {
+  const reSelector = createSelector(
+    state => state.filteres.filtered,
+    filtered => filtered.filter(hero => hero.name !== name)
+  )
   const dispatch = useDispatch()
   const heroes = useSelector(state => state.heroes.heroes)
-  const filteredHeroes = useSelector(state => state.filteres.filtered.filter(hero => hero.name !== name))
+  const filteredHeroes = useSelector(reSelector)
   const url = useSelector(state => state.filteres.url)
   const { request } = useHttp()
   function deleteHero() {
