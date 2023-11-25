@@ -2,7 +2,7 @@ import {useHttp} from '../../hooks/http.hook'
 import { useEffect } from 'react' 
 import { useDispatch, useSelector } from 'react-redux' 
 
-import { heroesFetched, heroesFetchingError } from '../../actions/actions' 
+import { fetchHeroes } from '../../actions/actions' 
 import HeroesListItem from "../heroesListItem/HeroesListItem" 
 import Spinner from '../spinner/Spinner' 
 
@@ -22,16 +22,8 @@ const HeroesList = () => {
   const {request} = useHttp() 
 
   useEffect(() => {
-    dispatch('HEROES_FETCHING') 
-    request(url)
-      .then(data => {
-        if (data === null) data = []
-        dispatch(heroesFetched(data))
-      })
-      .catch(() => dispatch(heroesFetchingError()))
-
-      // eslint-disable-next-line
-  }, []) 
+    dispatch(fetchHeroes(request, url)) 
+  }, [dispatch, request, url]) 
 
   if (heroesLoadingStatus === "loading") {
       return <Spinner/> 

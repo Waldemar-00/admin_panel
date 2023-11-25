@@ -1,3 +1,13 @@
+export const fetchHeroes = (request, url) => (dispatch) => {
+  dispatch(heroesFetching())
+  request(url)
+    .then(data => {
+      if (data === null) data = []
+      dispatch(heroesFetched(data))
+    })
+    .catch(() => dispatch(heroesFetchingError()))
+}
+
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'

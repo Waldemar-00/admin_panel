@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux' 
 import heroes from '../reducers/heroes'
 import filteres from '../reducers/filteres'
+import ReduxThunk from 'redux-thunk'
 
 const middleware = () => (next) => (action) => {      // the store is the first function ({ dispatch, getState })
   return typeof action === 'string' ? next({ type: action }) : next(action) // next is a dispatch
@@ -15,7 +16,7 @@ const middleware = () => (next) => (action) => {      // the store is the first 
   // return store
 // }
 const store = createStore(combineReducers({ heroes, filteres }),
-  compose(applyMiddleware(middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  compose(applyMiddleware(ReduxThunk, middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   // compose(enhancer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 ) 
 export default store 
