@@ -1,7 +1,7 @@
 const initialState = {
   filters: [],
   filtered: [],
-  url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json",
+  url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json"
 }
 
 const filtered = (state = initialState, action) => {

@@ -7,7 +7,12 @@ export const fetchHeroes = (request, url) => (dispatch) => {
     })
     .catch(() => dispatch(heroesFetchingError()))
 }
-
+export const getFiltersRequest = (request, url) => (dispatch) => {
+  request(url)
+    .then(data => {
+      dispatch(getFilters(data))
+    })
+} 
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'

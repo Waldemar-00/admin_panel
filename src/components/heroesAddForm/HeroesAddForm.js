@@ -10,7 +10,7 @@
 // данных из фильтров
 //!Done!
 import { useSelector, useDispatch } from 'react-redux'
-import { getFilters } from '../../actions/actions'
+import { getFiltersRequest } from '../../actions/actions'
 import { useHttp } from '../../hooks/http.hook'
 import { addHeroes } from '../../actions/actions'
 import { filtered } from '../../actions/actions'
@@ -20,15 +20,13 @@ const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes.heroes)
   const filteredHeroes = useSelector(state => state.filteres.filtered)
   const url = useSelector(state => state.heroes.url)
+  const url_filter = useSelector(state => state.filteres.url)
   const filters = useSelector(state => state.filteres.filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
   useEffect(() => {
-    request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json")
-      .then(data => {
-        dispatch(getFilters(data))
-      })
-  }, [request, dispatch])
+    dispatch(getFiltersRequest(request, url_filter))
+  }, [ request, url_filter, dispatch ])
   function submitHero(e) {
     e.preventDefault()
     const id = v4()
