@@ -1,20 +1,9 @@
-//!Done!
-// Задача для этого компонента:
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
-//!Done!
 import { useSelector, useDispatch } from 'react-redux'
 import { getFiltersRequest } from '../../actions/actions'
 import { useHttp } from '../../hooks/http.hook'
 import { addHeroes } from '../../actions/actions'
 import { filtered } from '../../actions/actions'
-import { v4 } from 'uuid'
+import { nanoid } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes.heroes)
@@ -29,7 +18,7 @@ const HeroesAddForm = () => {
   }, [ request, url_filter, dispatch ])
   function submitHero(e) {
     e.preventDefault()
-    const id = v4()
+    const id = nanoid()
     const name = document.querySelector('#name').value
     const description = document.querySelector('#text').value
     const element = document.querySelector('#element').value
@@ -77,7 +66,7 @@ const HeroesAddForm = () => {
           name="element">
                 {
                   filters.map(filter => {
-                    return <option key={ v4() }>{ filter }</option>
+                    return <option key={ nanoid() }>{ filter }</option>
                   })
                 }
               </select>

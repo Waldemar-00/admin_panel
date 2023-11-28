@@ -15,9 +15,7 @@ export const getFiltersRequest = (request, url) => (dispatch) => {
     })
 } 
 export const heroesFetching = createAction('HEROES_FETCHING')
-
 export const heroesFetched = createAction('HEROES_FETCHED')
-//! The payload will come from the function parameters when we call the actionsCreater in the dispatch. See top! 
 export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR')
 export const deleteHeroes = createAction('DELETE_HERO')
 export const addHeroes = createAction('ADD_HERO')

@@ -1,7 +1,7 @@
 import { useHttp } from '../../hooks/http.hook'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteHeroes, filtered } from '../../actions/actions'
-import { createSelector } from 'reselect'
+import { createSelector } from "@reduxjs/toolkit"
 const HeroesListItem = ({ name, description, element }) => {
   const reSelector = createSelector(
     state => state.filteres.filtered,
@@ -39,7 +39,6 @@ const HeroesListItem = ({ name, description, element }) => {
         default:
             elementClassName = 'bg-warning bg-gradient' 
     }
-
     return (
         <li 
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
