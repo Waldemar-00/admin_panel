@@ -31,7 +31,7 @@ const HeroesList = () => {
 
     return arr.map(({ id, ...props }) => {
       if (id) {
-          return <HeroesListItem key={id} {...props} />
+          return <HeroesListItem key={id} id={id} {...props} />
       } else {
           return <h5 className="text-center mt-5">Такого героя пока нет</h5>
         }
