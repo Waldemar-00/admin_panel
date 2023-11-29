@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { getFiltersRequest } from '../../actions/actions'
 import { useHttp } from '../../hooks/http.hook'
-import { addHeroes } from '../../actions/actions'
+import { heroesAdd } from '../heroesList/heroesSlice'
 import { filtered } from '../../actions/actions'
 import { nanoid } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
@@ -26,7 +26,7 @@ const HeroesAddForm = () => {
     if ((filteredHeroes.length > 0) && (element === filteredHeroes[0].element)) {
       dispatch(filtered([...filteredHeroes, { id, name, description, element }]))
     }
-    dispatch(addHeroes(hero))
+    dispatch(heroesAdd(hero))
     const heroesToServer = { ...hero }
     request(url, 'PUT', JSON.stringify(heroesToServer))
     document.querySelector('form').reset()
