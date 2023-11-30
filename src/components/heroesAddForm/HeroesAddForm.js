@@ -2,15 +2,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getFiltersRequest } from '../../actions/actions'
 import { useHttp } from '../../hooks/http.hook'
 import { heroesAdd } from '../heroesList/heroesSlice'
-import { filtered } from '../../actions/actions'
+import { filtered } from '../heroesFilters/filtersSlice'
 import { nanoid } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes.heroes)
-  const filteredHeroes = useSelector(state => state.filteres.filtered)
+  const filteredHeroes = useSelector(state => state.filters.filtered)
   const url = useSelector(state => state.heroes.url)
-  const url_filter = useSelector(state => state.filteres.url)
-  const filters = useSelector(state => state.filteres.filters)
+  const url_filter = useSelector(state => state.filters.url)
+  const filters = useSelector(state => state.filters.filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
   useEffect(() => {

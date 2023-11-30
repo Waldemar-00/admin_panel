@@ -8,7 +8,7 @@ import Spinner from '../spinner/Spinner'
 
 const HeroesList = () => {
   const heroes = useSelector(state => state.heroes.heroes) 
-  const filtered = useSelector(state => state.filteres.filtered)
+  const filtered = useSelector(state => state.filters.filtered)
   const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus)
   const url = useSelector(state => state.heroes.url)
   const dispatch = useDispatch() 

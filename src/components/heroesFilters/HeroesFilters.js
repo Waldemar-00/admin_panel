@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { filtered } from '../../actions/actions'
+import { filtered } from './filtersSlice'
 const HeroesFilters = () => {
-  const filters = useSelector(state => state.filteres.filters)
+  const filters = useSelector(state => state.filters.filters)
   const heroes = useSelector(state => state.heroes.heroes)
   const dispatch = useDispatch()
   function filterOfHeroes(e) {

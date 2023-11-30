@@ -1,11 +1,11 @@
 import { useHttp } from '../../hooks/http.hook'
 import { useSelector, useDispatch } from 'react-redux'
-import { filtered } from '../../actions/actions'
+import { filtered } from '../heroesFilters/filtersSlice'
 import { heroesDelete } from '../heroesList/heroesSlice'
 import { createSelector } from "@reduxjs/toolkit"
 const HeroesListItem = ({ id, name, description, element }) => {
   const reSelector = createSelector(
-    state => state.filteres.filtered,
+    state => state.filters.filtered,
     filtered => filtered.filter(hero => hero.id !== id)
   )
   const dispatch = useDispatch()
