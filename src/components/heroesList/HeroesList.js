@@ -1,8 +1,6 @@
-import {useHttp} from '../../hooks/http.hook' 
 import { useEffect } from 'react' 
 import { useDispatch, useSelector } from 'react-redux' 
-
-import { fetchHeroes } from '../../actions/actions' 
+import { heroesFetch } from './heroesSlice' 
 import HeroesListItem from "../heroesListItem/HeroesListItem" 
 import Spinner from '../spinner/Spinner' 
 
@@ -10,13 +8,10 @@ const HeroesList = () => {
   const heroes = useSelector(state => state.heroes.heroes) 
   const filtered = useSelector(state => state.filters.filtered)
   const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus)
-  const url = useSelector(state => state.heroes.url)
-  const dispatch = useDispatch() 
-  const {request} = useHttp() 
-
+  const dispatch = useDispatch()  
   useEffect(() => {
-    dispatch(fetchHeroes(request, url)) 
-  }, [dispatch, request, url]) 
+    dispatch(heroesFetch()) 
+  }, [dispatch]) 
 
   if (heroesLoadingStatus === "loading") {
       return <Spinner/> 

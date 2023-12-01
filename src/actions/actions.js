@@ -1,8 +1,8 @@
-import {
-  heroesFetching,
-  heroesFetched,
-  heroesFetchingError,
-} from '../components/heroesList/heroesSlice'
+// import {
+  // heroesFetching,
+  // heroesFetched,
+  // heroesFetchingError,
+// } from '../components/heroesList/heroesSlice'
 import { getFilters } from '../components/heroesFilters/filtersSlice'
 // export const heroesFetching = createAction('HEROES_FETCHING')
 // export const heroesFetched = createAction('HEROES_FETCHED')
@@ -11,15 +11,15 @@ import { getFilters } from '../components/heroesFilters/filtersSlice'
 // export const addHeroes = createAction('ADD_HERO')
 // export const getFilters = createAction('GET_FILTERS')
 // export const filtered = createAction('FILTERED')
-export const fetchHeroes = (request, url) => (dispatch) => {
-  dispatch(heroesFetching())
-  request(url)
-    .then(data => {
-      if (data === null) data = []
-      dispatch(heroesFetched(data))
-    })
-    .catch(() => dispatch(heroesFetchingError()))
-}
+// export const fetchHeroes = (request, url) => (dispatch) => {
+  // dispatch(heroesFetching())
+  // request(url)
+    // .then(data => {
+      // if (data === null) data = []
+      // dispatch(heroesFetched(data))
+    // })
+    // .catch(() => dispatch(heroesFetchingError()))
+// }
 export const getFiltersRequest = (request, url) => (dispatch) => {
   request(url)
     .then(data => {
