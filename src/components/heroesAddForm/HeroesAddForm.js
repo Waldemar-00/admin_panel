@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { getFiltersRequest } from '../../actions/actions'
+import { filtersRequest } from '../heroesFilters/filtersSlice'
 import { useHttp } from '../../hooks/http.hook'
 import { heroesAdd } from '../heroesList/heroesSlice'
 import { filtered } from '../heroesFilters/filtersSlice'
@@ -9,13 +9,12 @@ const HeroesAddForm = () => {
   const heroes = useSelector(state => state.heroes.heroes)
   const filteredHeroes = useSelector(state => state.filters.filtered)
   const url = useSelector(state => state.heroes.url)
-  const url_filter = useSelector(state => state.filters.url)
   const filters = useSelector(state => state.filters.filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
   useEffect(() => {
-    dispatch(getFiltersRequest(request, url_filter))
-  }, [ request, url_filter, dispatch ])
+    dispatch(filtersRequest())
+  }, [ dispatch ])
   function submitHero(e) {
     e.preventDefault()
     const id = nanoid()
@@ -63,7 +62,7 @@ const HeroesAddForm = () => {
                   required
                   className="form-select" 
                   id="element" 
-          name="element">
+                  name="element">
                 {
                   filters.map(filter => {
                     return <option key={ nanoid() }>{ filter }</option>
