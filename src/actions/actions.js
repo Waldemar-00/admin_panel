@@ -3,7 +3,7 @@
   // heroesFetched,
   // heroesFetchingError,
 // } from '../components/heroesList/heroesSlice'
-import { getFilters } from '../components/heroesFilters/filtersSlice'
+// import { getFilters } from '../components/heroesFilters/filtersSlice'
 // export const heroesFetching = createAction('HEROES_FETCHING')
 // export const heroesFetched = createAction('HEROES_FETCHED')
 // export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR')
@@ -20,9 +20,9 @@ import { getFilters } from '../components/heroesFilters/filtersSlice'
     // })
     // .catch(() => dispatch(heroesFetchingError()))
 // }
-export const getFiltersRequest = (request, url) => (dispatch) => {
-  request(url)
-    .then(data => {
-      dispatch(getFilters(data))
-    })
-} 
+// export const getFiltersRequest = (request, url) => (dispatch) => {
+  // request(url)
+    // .then(data => {
+      // dispatch(getFilters(data))
+    // })
+// } 
