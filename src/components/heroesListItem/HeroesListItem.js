@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { filtered } from '../heroesFilters/filtersSlice'
 import { heroesDelete } from '../heroesList/heroesSlice'
 import { createSelector } from "@reduxjs/toolkit"
+import { selectAll } from '../heroesList/heroesSlice'
 const HeroesListItem = ({ id, name, description, element }) => {
   const reSelector = createSelector(
     state => state.filters.filtered,
     filtered => filtered.filter(hero => hero.id !== id)
   )
   const dispatch = useDispatch()
-  const heroes = useSelector(state => state.heroes.heroes)
+  const heroes = useSelector(state => selectAll(state))
   const filteredHeroes = useSelector(reSelector)
   const url = useSelector(state => state.heroes.url)
   const { request } = useHttp()

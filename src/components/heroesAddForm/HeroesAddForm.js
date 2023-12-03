@@ -5,8 +5,9 @@ import { heroesAdd } from '../heroesList/heroesSlice'
 import { filtered } from '../heroesFilters/filtersSlice'
 import { nanoid } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
+import { selectAll } from '../heroesList/heroesSlice'
 const HeroesAddForm = () => {
-  const heroes = useSelector(state => state.heroes.heroes)
+  const heroes = useSelector(state => selectAll(state))
   const filteredHeroes = useSelector(state => state.filters.filtered)
   const url = useSelector(state => state.heroes.url)
   const filters = useSelector(state => state.filters.filters)
