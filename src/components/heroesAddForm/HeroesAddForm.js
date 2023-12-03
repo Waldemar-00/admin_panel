@@ -26,7 +26,7 @@ const HeroesAddForm = () => {
     if ((filteredHeroes.length > 0) && (element === filteredHeroes[0].element)) {
       dispatch(filtered([...filteredHeroes, { id, name, description, element }]))
     }
-    dispatch(heroesAdd(hero))
+    dispatch(heroesAdd({ id, name, description, element }))
     const heroesToServer = { ...hero }
     request(url, 'PUT', JSON.stringify(heroesToServer))
     document.querySelector('form').reset()

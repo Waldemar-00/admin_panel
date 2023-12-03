@@ -15,10 +15,9 @@ const HeroesListItem = ({ id, name, description, element }) => {
   const url = useSelector(state => state.heroes.url)
   const { request } = useHttp()
   function deleteHero() {
-    const array = heroes.filter(hero => hero.id !== id)
-    dispatch(heroesDelete(array))
+    dispatch(heroesDelete(heroes.filter(hero => hero.id === id)[0].id))
     dispatch(filtered(filteredHeroes))
-    deleteHeroFromServer(array)
+    deleteHeroFromServer(heroes.filter(hero => hero.id !== id))
   }
   function deleteHeroFromServer(array) {
     const object = { ...array }
