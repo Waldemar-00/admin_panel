@@ -2,11 +2,6 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import { useHttp } from '../../hooks/http.hook'
 
 const heroesAdapter = createEntityAdapter()
-// const initialState = {
-  // heroes: [],
-  // heroesLoadingStatus: 'idle',
-  // url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json",
-// }
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: 'idle',
   url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/heroes.json",
@@ -47,4 +42,4 @@ export const {
 } = actions
 export default reducer
 
-export const { selectAll } = heroesAdapter.getSelectors(state => state.heroes)
+export const heroesSelectors = heroesAdapter.getSelectors(state => state.heroes)
