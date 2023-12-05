@@ -1,10 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit'
 import { useHttp } from '../../hooks/http.hook'
-const initialState = {
+
+const filtersAdapter = createEntityAdapter()
+const initialState = filtersAdapter.getInitialState({
   filters: [],
   filtered: [],
   url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json"
-}
+})
 export const filtersRequest = createAsyncThunk(
   'filters/filtersRequest',
   () => {
@@ -33,3 +35,4 @@ export const {
   filtered
 } = actions
 export default reducer
+export const filtersSelectors = filtersAdapter.getSelectors(state => state.filters)

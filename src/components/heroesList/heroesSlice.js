@@ -25,7 +25,7 @@ const heroesSlice = createSlice({
       .addCase(heroesFetch.pending, state => { state.heroesLoadingStatus = 'loading' })
       .addCase(heroesFetch.fulfilled, (state, action) => {
         state.heroesLoadingStatus = 'idle'
-        // state.heroes = action.payload
+        //! state.heroes = action.payload
         heroesAdapter.setAll(state, action.payload)
       })
       .addCase(heroesFetch.rejected, state => { state.heroesLoadingStatus = 'error' })
