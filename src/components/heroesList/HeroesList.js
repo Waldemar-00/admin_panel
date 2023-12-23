@@ -1,22 +1,21 @@
 import { useEffect } from 'react' 
 import { useDispatch, useSelector } from 'react-redux' 
-import { heroesFetch, heroesSelectors } from './heroesSlice' 
+import { heroesAllAdd } from './heroesSlice' 
 import HeroesListItem from "../heroesListItem/HeroesListItem" 
-import Spinner from '../spinner/Spinner' 
+import Spinner from '../spinner/Spinner'
+import { useGetHeroesQuery } from '../../api/api_Slice' 
 
 const HeroesList = () => {
-  // const heroes = useSelector(state => state.heroes.heroes)
-  const heroes = useSelector(state => heroesSelectors.selectAll(state))
+  const { data, isLoading, isSuccess, isError, Error } = useGetHeroesQuery() //! ++ isFetching
   const filtered = useSelector(state => state.filters.filtered)
-  const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus)
   const dispatch = useDispatch()  
   useEffect(() => {
-    dispatch(heroesFetch()) 
-  }, [dispatch]) 
-
-  if (heroesLoadingStatus === "loading") {
+    if (isSuccess) dispatch(heroesAllAdd(data))
+  }, [isSuccess, dispatch, data])
+  if (isLoading) {
       return <Spinner/> 
-  } else if (heroesLoadingStatus === "error") {
+  } else if (isError) {
+    console.error(Error)
       return <h5 className="text-center mt-5">Ошибка загрузки</h5>
   }
 
@@ -37,7 +36,7 @@ const HeroesList = () => {
   if (filtered.length > 0 ) {
     elements = renderHeroesList(filtered)
   } else {
-    elements = renderHeroesList(heroes)
+    elements = renderHeroesList(data)
   } 
   return (
       <ul>

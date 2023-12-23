@@ -15,7 +15,6 @@ const HeroesFilters = () => {
     if (!e.target.className.includes('active')) {
       e.target.className = e.target.className + ' active'
     }
-    console.log(e.target.className)
     let array
     if (e.target.innerText === 'all') {
       array = [...heroes]

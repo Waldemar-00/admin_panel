@@ -5,13 +5,13 @@ const filtersAdapter = createEntityAdapter()
 const initialState = filtersAdapter.getInitialState({
   filters: [],
   filtered: [],
-  url: "https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json"
+  url: "https://fake-api-dfaa6-default-rtdb.firebaseio.com/filters.json"
 })
 export const filtersRequest = createAsyncThunk(
   'filters/filtersRequest',
   () => {
     const { request } = useHttp()
-    return request("https://admin-panel-fcc34-default-rtdb.firebaseio.com/filters.json")
+    return request("https://fake-api-dfaa6-default-rtdb.firebaseio.com/filters.json")
   }
 )
 const filtersSlice = createSlice({
@@ -28,11 +28,6 @@ const filtersSlice = createSlice({
       .addDefaultCase(() => { })
   }
 })
-const { actions, reducer } = filtersSlice
-
-export const {
-  getFilters,
-  filtered
-} = actions
-export default reducer
+export const { getFilters, filtered } = filtersSlice.actions
+export default filtersSlice.reducer
 export const filtersSelectors = filtersAdapter.getSelectors(state => state.filters)

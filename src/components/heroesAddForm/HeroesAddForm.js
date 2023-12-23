@@ -11,7 +11,6 @@ const HeroesAddForm = () => {
   const filteredHeroes = useSelector(state => state.filters.filtered)
   const url = useSelector(state => state.heroes.url)
   const filters = useSelector(state => state.filters.filters)
-  console.log(filters)
   const dispatch = useDispatch()
   const { request } = useHttp()
   useEffect(() => {
