@@ -6,7 +6,15 @@ export const api_Slice = createApi({
   endpoints: builder => ({
     getHeroes: builder.query({
       query: () => '/heroes.json'
+    }),
+    putHero: builder.mutation({
+      query: hero => ({
+        url: '/heroes.json',
+        method: 'PUT',
+        body: hero //! automatic json format
+      }),
+
     })
   })
 })
-export const { useGetHeroesQuery } = api_Slice
+export const { useGetHeroesQuery, usePutHeroMutation } = api_Slice

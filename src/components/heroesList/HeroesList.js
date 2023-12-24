@@ -6,7 +6,7 @@ import Spinner from '../spinner/Spinner'
 import { useGetHeroesQuery } from '../../api/api_Slice' 
 
 const HeroesList = () => {
-  const { data, isLoading, isSuccess, isError, Error } = useGetHeroesQuery() //! ++ isFetching
+  const { data, isLoading, isSuccess, isError, Error } = useGetHeroesQuery() //! ++ isFetching, isUninitialized, refetch
   const filtered = useSelector(state => state.filters.filtered)
   const dispatch = useDispatch()  
   useEffect(() => {
@@ -23,7 +23,6 @@ const HeroesList = () => {
       if (arr.length === 0) {
           return <h5 className="text-center mt-5">Героев пока нет</h5>
       }
-
     return arr.map(({ id, ...props }) => {
       if (id) {
           return <HeroesListItem key={id} id={id} {...props} />

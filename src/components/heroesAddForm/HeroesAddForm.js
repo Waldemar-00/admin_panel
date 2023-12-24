@@ -1,18 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { filtersRequest } from '../heroesFilters/filtersSlice'
-import { useHttp } from '../../hooks/http.hook'
 import { heroesAdd } from '../heroesList/heroesSlice'
 import { filtered } from '../heroesFilters/filtersSlice'
 import { nanoid } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 import { heroesSelectors } from '../heroesList/heroesSlice'
+import { usePutHeroMutation } from '../../api/api_Slice'
 const HeroesAddForm = () => {
+  const [ onQueryStarted ]= usePutHeroMutation()
   const heroes = useSelector(state => heroesSelectors.selectAll(state))
   const filteredHeroes = useSelector(state => state.filters.filtered)
-  const url = useSelector(state => state.heroes.url)
   const filters = useSelector(state => state.filters.filters)
   const dispatch = useDispatch()
-  const { request } = useHttp()
   useEffect(() => {
     dispatch(filtersRequest())
   }, [ dispatch ])
@@ -28,7 +27,7 @@ const HeroesAddForm = () => {
     }
     dispatch(heroesAdd({ id, name, description, element }))
     const heroesToServer = { ...hero }
-    request(url, 'PUT', JSON.stringify(heroesToServer))
+    onQueryStarted( heroesToServer ).unwrap()
     document.querySelector('form').reset()
   }
   return (
